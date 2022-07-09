@@ -3,7 +3,32 @@
   "description": "The place where you were.",
   "version": "0.0.0",
   "author": "Kazuya Hara <iam@kazuyahara.dev>",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^7.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "license": "MIT",
   "private": true,
-  "repository": "https://github.com/KazuyaHara/centro"
+  "repository": "https://github.com/KazuyaHara/centro",
+  "scripts": {
+    "commit": "npx cz",
+    "prepare": "husky install"
+  }
 }

@@ -1,0 +1,9 @@
+{
+  "name": "centro",
+  "description": "The place where you were.",
+  "version": "0.0.0",
+  "author": "Kazuya Hara <iam@kazuyahara.dev>",
+  "license": "MIT",
+  "private": true,
+  "repository": "https://github.com/KazuyaHara/centro"
+}

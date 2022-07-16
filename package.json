@@ -48,7 +48,8 @@
           "replacements": [
             {
               "files": [
-                "package.json"
+                "package.json",
+                "web/package.json"
               ],
               "from": "\"version\": \".*\"",
               "to": "\"version\": \"${nextRelease.version}\""
@@ -61,7 +62,8 @@
         {
           "assets": [
             "CHANGELOG.md",
-            "package.json"
+            "package.json",
+            "web/package.json"
           ],
           "message": "release: ${nextRelease.gitTag} [skip ci]"
         }
@@ -78,6 +80,12 @@
   "scripts": {
     "commit": "npx cz",
     "prepare": "husky install",
-    "prettier": "prettier -w package.json README.md"
+    "prettier": "prettier -w package.json README.md web/*.json web/src/**/*",
+    "web": "yarn workspace web"
+  },
+  "workspaces": {
+    "packages": [
+      "web"
+    ]
   }
 }

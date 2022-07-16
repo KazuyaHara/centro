@@ -13,4 +13,4 @@ This projetc use [Conventional Commit](https://www.conventionalcommits.org/) for
 
 ### Versioning
 
-This project follows [Semantic Versioning](https://semver.org/). In order to update the version, we run `npx semantic-release` in [release workflow](https://github.com/KazuyaHara/centro/blob/main/.github/workflows/release.yml). This workflow will automatically update the version number in `package.json`. And also automatically generate a `CHANGELOG.md`.
+This project follows [Semantic Versioning](https://semver.org/). In order to update the version, we run `npx semantic-release` in [release workflow](https://github.com/KazuyaHara/centro/blob/main/.github/workflows/release.yml). This workflow will automatically update the version number in `package.json` and `web/package.json`. And also automatically generate a `CHANGELOG.md`.

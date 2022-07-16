@@ -83,6 +83,7 @@
     "deploy:dev": "yarn build && firebase use default && firebase deploy",
     "deploy:prd": "yarn build && firebase use production && firebase deploy && firebase use default",
     "deploy:stg": "yarn build && firebase use staging && firebase deploy && firebase use default",
+    "eslint": "yarn workspaces run eslint",
     "prepare": "husky install",
     "prettier": "prettier -w firebase.json package.json README.md web/*.json web/src/**/*",
     "web": "yarn workspace web"

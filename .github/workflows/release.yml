@@ -25,6 +25,9 @@ jobs:
           path: 'package.json'
           prop_path: 'version'
 
+      - name: 📦 Install dependencies
+        run: yarn install
+
       - name: 🚀 Release
         id: release
         run: npx semantic-release

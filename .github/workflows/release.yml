@@ -15,23 +15,47 @@ jobs:
       - name: 🏗 Checkout
         uses: actions/checkout@v2
 
-      - name: 🏗 Setup Node v16.16.0
-        uses: actions/setup-node@v2
-        with:
-          node-version: "v16.16.0"
-
-      - name: 📦 Install dependencies
-        run: yarn install
+      - name: 🏗 Setup Node
+        uses: ./.github/actions/setup-node
 
       - name: 📝 Get current version
         id: current
         uses: notiz-dev/github-action-json-property@release
         with:
-          path: "package.json"
-          prop_path: "version"
+          path: 'package.json'
+          prop_path: 'version'
 
       - name: 🚀 Release
         id: release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  preview:
+    name: Preview on staging environment
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Checkout
+        uses: actions/checkout@v2
+
+      - name: 🏗 Setup Node
+        uses: ./.github/actions/setup-node
+
+      - name: 📝 Update web version
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: './web/package.json'
+        env:
+          version: '${{ needs.release.outputs.nextVersion || needs.release.outputs.currentVersion }}'
+
+      - name: 📦 Install dependencies
+        run: yarn install
+
+      - name: 📦 Build app
+        run: yarn build
+
+      - name: 🚀 Deploy Firebase
+        run: |
+          npm i -g firebase-tools
+          firebase deploy --project staging --token ${{ secrets.FIREBASE_TOKEN }} --force

@@ -38,6 +38,9 @@
   "private": true,
   "scripts": {
     "build": "react-scripts build",
+    "deploy:dev": "yarn build && firebase use default && firebase deploy --only hosting",
+    "deploy:prd": "yarn build && firebase use production && firebase deploy --only hosting && firebase use default",
+    "deploy:stg": "yarn build && firebase use staging && firebase deploy --only hosting && firebase use default",
     "eject": "react-scripts eject",
     "start": "react-scripts start",
     "test": "react-scripts test"

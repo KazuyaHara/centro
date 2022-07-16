@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "centro-app-dev",
+    "staging": "centro-app-stg",
+    "production": "centro-app-prd"
+  },
+  "targets": {},
+  "etags": {}
+}

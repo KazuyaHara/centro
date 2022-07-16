@@ -1,0 +1,11 @@
+name: Setup Node
+description: Composite action for setup-node
+runs:
+  using: 'composite'
+  steps:
+    - name: 🏗 Setup Node v16.16.0
+      uses: actions/setup-node@v2
+      with:
+        node-version: 'v16.16.0'
+        cache: 'yarn'
+      shell: bash

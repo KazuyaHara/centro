@@ -65,7 +65,7 @@
             "package.json",
             "web/package.json"
           ],
-          "message": "release: ${nextRelease.gitTag} [skip ci]"
+          "message": "chore(release): ${nextRelease.gitTag} [skip ci]"
         }
       ],
       [

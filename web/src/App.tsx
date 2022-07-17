@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-import Landing from './components/pages/landing';
+import StateProviders from './hooks/providers';
+import Routes from './routes';
 import './i18n';
 import ThemeProvider from './theme';
 
@@ -11,7 +12,9 @@ export default function App() {
     <HelmetProvider>
       <Helmet defaultTitle="Centro - The palce where you were." titleTemplate="%s | Centro" />
       <ThemeProvider>
-        <Landing />
+        <StateProviders>
+          <Routes />
+        </StateProviders>
       </ThemeProvider>
     </HelmetProvider>
   );

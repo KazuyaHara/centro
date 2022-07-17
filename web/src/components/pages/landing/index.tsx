@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Box, Container } from '@mui/material';
+import { Box, Button, Container, Stack } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import Logo from '../../../assets/images/logo/black-with-tagline.png';
 
@@ -40,8 +41,10 @@ const shuffle = ([...array]) => {
 };
 
 export default function Landing() {
+  const { t } = useTranslation();
+
   return (
-    <Box display="flex" flexDirection="column" justifyContent="center" minHeight="100vh">
+    <Box display="flex" flexDirection="column" justifyContent="center" minHeight="100vh" py={10}>
       <Container>
         <Box
           alt="Centro"
@@ -56,6 +59,14 @@ export default function Landing() {
         <InfiniteCarousel imagePaths={shuffle(images)} />
         <InfiniteCarousel imagePaths={shuffle(images)} startOffset={0.5} />
       </Box>
+      <Container>
+        <Stack alignItems="center" mt={3} spacing={2}>
+          <Button color="primary" size="large" variant="contained">
+            {t('login')}
+          </Button>
+          <Button size="large">{t('signup')}</Button>
+        </Stack>
+      </Container>
     </Box>
   );
 }

@@ -85,7 +85,7 @@
     "deploy:stg": "yarn build && firebase use staging && firebase deploy && firebase use default",
     "eslint": "yarn workspaces run eslint",
     "prepare": "husky install",
-    "prettier": "prettier -w firebase.json package.json README.md web/*.json web/src/**/*.{ts,tsx}",
+    "prettier": "prettier -w firebase.json package.json README.md web/*.json web/src/**/*.{ts,tsx,json}",
     "web": "yarn workspace web"
   },
   "workspaces": {

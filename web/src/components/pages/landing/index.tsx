@@ -6,7 +6,7 @@ import Logo from '../../../assets/images/logo/black-with-tagline.png';
 
 export default function Landing() {
   return (
-    <Box minHeight="100vh">
+    <Box display="flex" flexDirection="column" justifyContent="center" minHeight="100vh">
       <Container>
         <Box
           alt="Centro"

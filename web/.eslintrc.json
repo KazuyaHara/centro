@@ -10,7 +10,11 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "import/extensions": ["error", "ignorePackages", { "ts": "never", "tsx": "never" }],
-    "react/jsx-filename-extension": ["error", { "extensions": [".ts", ".tsx"] }]
+    "react/jsx-filename-extension": ["error", { "extensions": [".ts", ".tsx"] }],
+    "react/require-default-props": [
+      "error",
+      { "forbidDefaultForRequired": false, "ignoreFunctionalComponents": true }
+    ]
   },
   "settings": { "import/resolver": { "node": { "extensions": [".ts", ".tsx"] } } }
 }

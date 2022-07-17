@@ -15,6 +15,9 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.9.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -22,10 +25,17 @@
     "@types/node": "^16.11.45",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "firebase": "^9.9.0",
+    "framer-motion": "^6.5.1",
+    "i18next": "^21.8.14",
+    "i18next-browser-languagedetector": "^6.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^1.3.0",
+    "react-i18next": "^11.18.1",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
+    "unstated-next": "^1.1.0",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
@@ -48,10 +58,12 @@
   "main": "src/index.tsx",
   "private": true,
   "scripts": {
-    "build": "react-scripts build",
-    "deploy:dev": "yarn build && firebase use default && firebase deploy --only hosting",
-    "deploy:prd": "yarn build && firebase use production && firebase deploy --only hosting && firebase use default",
-    "deploy:stg": "yarn build && firebase use staging && firebase deploy --only hosting && firebase use default",
+    "build:dev": "cp .env.development .env.production.local && react-scripts build",
+    "build:prd": "cp .env.production .env.production.local && react-scripts build",
+    "build:stg": "cp .env.staging .env.production.local && react-scripts build",
+    "deploy:dev": "yarn build:dev && firebase use default && firebase deploy --only hosting",
+    "deploy:prd": "yarn build:prd && firebase use production && firebase deploy --only hosting && firebase use default",
+    "deploy:stg": "yarn build:stg && firebase use staging && firebase deploy --only hosting && firebase use default",
     "eject": "react-scripts eject",
     "eslint": "eslint src/**/*.{ts,tsx}",
     "start": "react-scripts start"

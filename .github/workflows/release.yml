@@ -52,6 +52,10 @@ jobs:
         env:
           version: '${{ needs.release.outputs.nextVersion || needs.release.outputs.currentVersion }}'
 
+      - name: 📝 Create dotenv file
+        run: echo ${{ secrets.DOTENV_STG }} | base64 --decode > .env.staging
+        working-directory: web
+
       - name: 📦 Install dependencies
         run: yarn install
 

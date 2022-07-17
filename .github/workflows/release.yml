@@ -60,7 +60,7 @@ jobs:
         run: yarn install
 
       - name: 📦 Build app
-        run: yarn build
+        run: yarn build:stg
 
       - name: 🚀 Deploy Firebase
         run: |

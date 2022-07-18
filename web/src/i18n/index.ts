@@ -10,4 +10,4 @@ const resources = { en, ja };
 export default i18n
   .use(LanguageDetector)
   .use(initReactI18next)
-  .init({ interpolation: { escapeValue: false }, resources });
+  .init({ fallbackLng: 'en', interpolation: { escapeValue: false }, resources });

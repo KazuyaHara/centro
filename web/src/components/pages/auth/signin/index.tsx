@@ -16,7 +16,7 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
-  const handleSignup = async (data: Submit) => {
+  const handleSignIn = async (data: Submit) => {
     setLoading(true);
     await signInWithEmail(data).catch(({ message }) => {
       alert.open({ message, severity: 'error' });
@@ -39,7 +39,7 @@ export default function SignIn() {
         }}
       >
         <Box alt="Centro" component="img" mx="auto" src={Logo} sx={{ maxWidth: 180 }} />
-        <Form loading={loading} onSubmit={handleSignup} sx={{ mt: 3 }} />
+        <Form loading={loading} onSubmit={handleSignIn} sx={{ mt: 3 }} />
         <Stack>
           <Typography component={Link} mt={3} mx="auto" to="/reset-password" variant="body2">
             {t('auth.label.forgetPassword')}

@@ -1,33 +1,37 @@
 import React, { useState } from 'react';
 
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Logo from '../../../../assets/images/logo/black-with-tagline.png';
 import Alert from '../../../../hooks/alert';
 import Auth from '../../../../hooks/auth';
-import Form, { Submit } from '../../../organisms/form/signup';
+import Form, { Submit } from '../../../organisms/form/resetPassword';
 
-export default function SignUp() {
+export default function ResetPassword() {
   const alert = Alert.useContainer();
-  const { linkWithEmail } = Auth.useContainer();
+  const { sendPasswordResetEmail } = Auth.useContainer();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
-  const handleSignUp = async (data: Submit) => {
+  const handlePasswordReset = async (data: Submit) => {
     setLoading(true);
-    await linkWithEmail(data).catch(({ message }) => {
-      alert.open({ message, severity: 'error' });
-      setLoading(false);
-    });
+    await sendPasswordResetEmail(data)
+      .then(() => {
+        alert.open({ message: t('auth.label.sentPasswordResetEmail'), severity: 'success' });
+        navigate(-1);
+      })
+      .catch(({ message }) => alert.open({ message, severity: 'error' }))
+      .finally(() => setLoading(false));
   };
 
   return (
     <>
       <Helmet>
-        <title>{t('auth.label.signup')}</title>
+        <title>{t('auth.label.resetPassword')}</title>
       </Helmet>
       <Container
         maxWidth="xs"
@@ -39,10 +43,7 @@ export default function SignUp() {
         }}
       >
         <Box alt="Centro" component="img" mx="auto" src={Logo} sx={{ maxWidth: 180 }} />
-        <Form loading={loading} onSubmit={handleSignUp} sx={{ mt: 3 }} />
-        <Typography component={Link} mt={3} mx="auto" to="/signin" variant="body2">
-          {t('auth.label.alreadyHaveAnAccount')}
-        </Typography>
+        <Form loading={loading} onSubmit={handlePasswordReset} sx={{ mt: 3 }} />
       </Container>
     </>
   );

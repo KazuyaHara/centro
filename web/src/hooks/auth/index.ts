@@ -6,6 +6,7 @@ import {
   EmailAuthProvider,
   linkWithCredential,
   onAuthStateChanged,
+  sendPasswordResetEmail as firebaseSendPasswordResetEmail,
   signInAnonymously,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
@@ -17,6 +18,7 @@ import { createContainer } from 'unstated-next';
 import { auth } from '../../firebase';
 
 type Data = { isAnonymous: boolean; uid: string };
+export type SendPasswordResetEmail = { email: string };
 export type SignInWithEmail = { email: string; password: string };
 export type LinkWithEmail = SignInWithEmail;
 
@@ -25,7 +27,7 @@ const initialData = { isAnonymous: true, uid: '' };
 function useAuth() {
   const [data, setData] = useState<Data>(initialData);
   const [initializing, setInitializing] = useState(true);
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     const unsubscribe: Unsubscribe = subscribe();
@@ -55,6 +57,13 @@ function useAuth() {
       .catch(handleError);
   };
 
+  const sendPasswordResetEmail = async ({
+    email,
+  }: SendPasswordResetEmail): Promise<Error | void> => {
+    auth.languageCode = i18n.language;
+    return firebaseSendPasswordResetEmail(auth, email).catch(handleError);
+  };
+
   const signInWithEmail = async ({ email, password }: LinkWithEmail): Promise<Error | void> =>
     signInWithEmailAndPassword(auth, email, password)
       .then(() => undefined)
@@ -81,7 +90,14 @@ function useAuth() {
     );
   };
 
-  return { initializing, isAnonymous: data.isAnonymous, linkWithEmail, signInWithEmail, signOut };
+  return {
+    initializing,
+    isAnonymous: data.isAnonymous,
+    linkWithEmail,
+    sendPasswordResetEmail,
+    signInWithEmail,
+    signOut,
+  };
 }
 
 export default createContainer(useAuth);

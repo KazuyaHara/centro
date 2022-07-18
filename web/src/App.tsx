@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
+import Alert from './components/atoms/alert';
 import StateProviders from './hooks/providers';
 import Routes from './routes';
 import './i18n';
@@ -13,6 +14,7 @@ export default function App() {
       <Helmet defaultTitle="Centro - The palce where you were." titleTemplate="%s | Centro" />
       <ThemeProvider>
         <StateProviders>
+          <Alert />
           <Routes />
         </StateProviders>
       </ThemeProvider>

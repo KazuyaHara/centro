@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
+import GlobalStyles from './globalStyles';
 import palette from './palette';
 import typography from './typography';
 
@@ -12,6 +13,7 @@ export default function Theme({ children }: ThemeConfigProps) {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyles theme={theme} />
       <CssBaseline enableColorScheme />
       {children}
     </ThemeProvider>

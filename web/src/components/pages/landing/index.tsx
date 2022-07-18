@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Box, Button, Container, Stack } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import Logo from '../../../assets/images/logo/black-with-tagline.png';
 
@@ -62,9 +63,11 @@ export default function Landing() {
       <Container>
         <Stack alignItems="center" mt={3} spacing={2}>
           <Button color="primary" size="large" variant="contained">
-            {t('login')}
+            {t('auth.label.login')}
           </Button>
-          <Button size="large">{t('signup')}</Button>
+          <Button component={Link} size="large" to="/signup">
+            {t('auth.label.signup')}
+          </Button>
         </Stack>
       </Container>
     </Box>

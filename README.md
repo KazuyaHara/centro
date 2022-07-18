@@ -5,6 +5,24 @@
 
 The place where you were.
 
+## Quick start
+
+### Environemt variables
+
+[Dotenv](https://github.com/motdotla/dotenv) is a zero-dependency module that loads environment variables from a .env file into `process.env`. Storing configuration in the environment separate from code is based on The [Twelve-Factor App](http://12factor.net/config) methodology.
+
+Before run the development server, please put information in `.env.development` file in the root of `web` directory.
+
+```dosini
+REACT_APP_FIREBASE_API_KEY=YOUR_FIREBASE_API_KEY
+REACT_APP_FIREBASE_APP_ID=YOUR_FIREBASE_APP_ID
+REACT_APP_FIREBASE_AUTH_DOMAIN=YOUR_FIREBASE_AUTH_DOMAIN
+REACT_APP_FIREBASE_MEASUREMENT_ID=YOUR_FIREBASE_MEASUREMENT_ID
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=YOUR_FIREBASE_MESSAGING_SENDER_ID
+REACT_APP_FIREBASE_PROJECT_ID=YOUR_FIREBASE_PROJECT_ID
+REACT_APP_FIREBASE_STORAGE_BUCKET=YOUR_FIREBASE_STORAGE_BUCKET
+```
+
 ## Development rules
 
 ### Commit massages

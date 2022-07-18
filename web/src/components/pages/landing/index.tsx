@@ -62,7 +62,7 @@ export default function Landing() {
       </Box>
       <Container>
         <Stack alignItems="center" mt={3} spacing={2}>
-          <Button color="primary" size="large" variant="contained">
+          <Button color="primary" component={Link} size="large" to="/signin" variant="contained">
             {t('auth.label.login')}
           </Button>
           <Button component={Link} size="large" to="/signup">

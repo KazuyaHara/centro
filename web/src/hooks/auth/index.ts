@@ -7,6 +7,7 @@ import {
   linkWithCredential,
   onAuthStateChanged,
   signInAnonymously,
+  signInWithEmailAndPassword,
   signOut as firebaseSignOut,
   Unsubscribe,
 } from 'firebase/auth';
@@ -16,7 +17,8 @@ import { createContainer } from 'unstated-next';
 import { auth } from '../../firebase';
 
 type Data = { isAnonymous: boolean; uid: string };
-export type LinkWithEmail = { email: string; password: string };
+export type SignInWithEmail = { email: string; password: string };
+export type LinkWithEmail = SignInWithEmail;
 
 const initialData = { isAnonymous: true, uid: '' };
 
@@ -53,6 +55,11 @@ function useAuth() {
       .catch(handleError);
   };
 
+  const signInWithEmail = async ({ email, password }: LinkWithEmail): Promise<Error | void> =>
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => undefined)
+      .catch(handleError);
+
   const signOut = async (): Promise<Error | void> => firebaseSignOut(auth).catch(handleError);
 
   const subscribe = (): Unsubscribe => {
@@ -74,7 +81,7 @@ function useAuth() {
     );
   };
 
-  return { initializing, isAnonymous: data.isAnonymous, linkWithEmail, signOut };
+  return { initializing, isAnonymous: data.isAnonymous, linkWithEmail, signInWithEmail, signOut };
 }
 
 export default createContainer(useAuth);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
@@ -8,17 +8,17 @@ import { Link } from 'react-router-dom';
 import Logo from '../../../../assets/images/logo/black-with-tagline.png';
 import Alert from '../../../../hooks/alert';
 import Auth from '../../../../hooks/auth';
-import Form, { Submit } from '../../../organisms/form/signup';
+import Form, { Submit } from '../../../organisms/form/signin';
 
-export default function SignUp() {
+export default function SignIn() {
   const alert = Alert.useContainer();
-  const { linkWithEmail } = Auth.useContainer();
+  const { signInWithEmail } = Auth.useContainer();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
   const handleSignup = async (data: Submit) => {
     setLoading(true);
-    await linkWithEmail(data).catch(({ message }) => {
+    await signInWithEmail(data).catch(({ message }) => {
       alert.open({ message, severity: 'error' });
       setLoading(false);
     });
@@ -27,7 +27,7 @@ export default function SignUp() {
   return (
     <>
       <Helmet>
-        <title>{t('auth.label.signup')}</title>
+        <title>{t('auth.label.login')}</title>
       </Helmet>
       <Container
         maxWidth="xs"
@@ -40,9 +40,14 @@ export default function SignUp() {
       >
         <Box alt="Centro" component="img" mx="auto" src={Logo} sx={{ maxWidth: 180 }} />
         <Form loading={loading} onSubmit={handleSignup} sx={{ mt: 3 }} />
-        <Typography component={Link} mt={3} mx="auto" to="/signin" variant="body2">
-          {t('auth.label.alreadyHaveAnAccount')}
-        </Typography>
+        <Stack>
+          <Typography component={Link} mt={3} mx="auto" to="/reset-password" variant="body2">
+            {t('auth.label.forgetPassword')}
+          </Typography>
+          <Typography component={Link} mt={3} mx="auto" to="/signup" variant="body2">
+            {t('auth.label.signup')}
+          </Typography>
+        </Stack>
       </Container>
     </>
   );

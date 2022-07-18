@@ -7,12 +7,12 @@ import { createContainer } from 'unstated-next';
 import { auth } from '../../firebase';
 
 type Data = { isAnonymous: boolean; uid: string };
-type Return = { initializing: boolean };
+type Return = { initializing: boolean; isAnonymous: boolean };
 
 const initialData = { isAnonymous: true, uid: '' };
 
 function useAuth(): Return {
-  const [, setData] = useState<Data>(initialData);
+  const [data, setData] = useState<Data>(initialData);
   const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function useAuth(): Return {
     );
   };
 
-  return { initializing };
+  return { initializing, isAnonymous: data.isAnonymous };
 }
 
 export default createContainer(useAuth);

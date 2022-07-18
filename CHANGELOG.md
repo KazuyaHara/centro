@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/KazuyaHara/centro/compare/v0.1.0...v0.2.0) (2022-07-18)
+
+
+### Features
+
+* **web:** email authentication ([#13](https://github.com/KazuyaHara/centro/issues/13)) ([ad649b5](https://github.com/KazuyaHara/centro/commit/ad649b518999e88b8ddc47e2ce061712526a5698))
+
 # [0.1.0](https://github.com/KazuyaHara/centro/compare/v0.0.1...v0.1.0) (2022-07-17)
 
 

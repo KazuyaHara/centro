@@ -7,6 +7,7 @@ import {
   linkWithCredential,
   onAuthStateChanged,
   signInAnonymously,
+  signOut as firebaseSignOut,
   Unsubscribe,
 } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
@@ -16,15 +17,10 @@ import { auth } from '../../firebase';
 
 type Data = { isAnonymous: boolean; uid: string };
 export type LinkWithEmail = { email: string; password: string };
-type Return = {
-  initializing: boolean;
-  isAnonymous: boolean;
-  linkWithEmail: (params: LinkWithEmail) => Promise<Error | void>;
-};
 
 const initialData = { isAnonymous: true, uid: '' };
 
-function useAuth(): Return {
+function useAuth() {
   const [data, setData] = useState<Data>(initialData);
   const [initializing, setInitializing] = useState(true);
   const { t } = useTranslation();
@@ -57,6 +53,8 @@ function useAuth(): Return {
       .catch(handleError);
   };
 
+  const signOut = async (): Promise<Error | void> => firebaseSignOut(auth).catch(handleError);
+
   const subscribe = (): Unsubscribe => {
     const onComplete = () => setInitializing(false);
     const onError = () => {};
@@ -76,7 +74,7 @@ function useAuth(): Return {
     );
   };
 
-  return { initializing, isAnonymous: data.isAnonymous, linkWithEmail };
+  return { initializing, isAnonymous: data.isAnonymous, linkWithEmail, signOut };
 }
 
 export default createContainer(useAuth);

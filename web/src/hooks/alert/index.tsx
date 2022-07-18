@@ -6,8 +6,6 @@ import { createContainer } from 'unstated-next';
 type Alert = Pick<AlertProps, 'severity'> &
   Pick<SnackbarProps, 'autoHideDuration' | 'open'> & { message: string };
 
-type Return = { close: () => void; data: Alert; open: (params: Omit<Alert, 'open'>) => void };
-
 const initialData = {
   autoHideDuration: 5000,
   message: '',
@@ -15,7 +13,7 @@ const initialData = {
   severity: 'info' as AlertProps['severity'],
 };
 
-function useAlert(): Return {
+function useAlert() {
   const [data, setData] = useState<Alert>(initialData);
 
   const close = (): void => setData(initialData);

@@ -1,7 +1,7 @@
 {
   "name": "web",
   "description": "The place where you were.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "browserslist": {
     "production": [
       ">0.2%",

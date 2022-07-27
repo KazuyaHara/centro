@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/KazuyaHara/centro/compare/v0.3.0...v0.3.1) (2022-07-27)
+
+
+### Bug Fixes
+
+* **web:** favicon ([#18](https://github.com/KazuyaHara/centro/issues/18)) ([ae87761](https://github.com/KazuyaHara/centro/commit/ae87761ded56f44ebafd563dc0194b17055f7ff0))
+
 # [0.3.0](https://github.com/KazuyaHara/centro/compare/v0.2.0...v0.3.0) (2022-07-27)
 
 

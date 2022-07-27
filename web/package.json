@@ -76,7 +76,7 @@
   "private": true,
   "scripts": {
     "build:dev": "cp .env.development .env.production.local && react-scripts build",
-    "build:prd": "cp .env.production .env.production.local && react-scripts build",
+    "build:prd": "cp .env.production .env.production.local && GENERATE_SOURCEMAP=false react-scripts build",
     "build:stg": "cp .env.staging .env.production.local && react-scripts build",
     "deploy:dev": "yarn build:dev && firebase use default && firebase deploy --only hosting",
     "deploy:prd": "yarn build:prd && firebase use production && firebase deploy --only hosting && firebase use default",

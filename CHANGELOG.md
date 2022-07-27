@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/KazuyaHara/centro/compare/v0.2.0...v0.3.0) (2022-07-27)
+
+
+### Features
+
+* **web:** Progressive Web Apps ([#17](https://github.com/KazuyaHara/centro/issues/17)) ([7cfb627](https://github.com/KazuyaHara/centro/commit/7cfb62758e8014de958a9388d592a0d08bac604d))
+
 # [0.2.0](https://github.com/KazuyaHara/centro/compare/v0.1.0...v0.2.0) (2022-07-18)
 
 

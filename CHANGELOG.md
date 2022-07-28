@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/KazuyaHara/centro/compare/v0.3.1...v0.4.0) (2022-07-28)
+
+
+### Features
+
+* show map using Maps JavaScript API ([#20](https://github.com/KazuyaHara/centro/issues/20)) ([00f9cfa](https://github.com/KazuyaHara/centro/commit/00f9cfa6ff38c88596f59b03cae081b0f3fd2145))
+
 ## [0.3.1](https://github.com/KazuyaHara/centro/compare/v0.3.0...v0.3.1) (2022-07-27)
 
 

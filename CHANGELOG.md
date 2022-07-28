@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/KazuyaHara/centro/compare/v0.5.0...v0.5.1) (2022-07-28)
+
+
+### Bug Fixes
+
+* **web:** restrict map panning ([#22](https://github.com/KazuyaHara/centro/issues/22)) ([ec256a3](https://github.com/KazuyaHara/centro/commit/ec256a3b89417dacf781afe64c94e3e3f1f8fc65))
+
 # [0.5.0](https://github.com/KazuyaHara/centro/compare/v0.4.0...v0.5.0) (2022-07-28)
 
 

@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Box, Button, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { GoogleMapProps } from '@react-google-maps/api';
 
-import Auth from '../../../hooks/auth';
+import Map from '../../organisms/map';
+
+type Position = GoogleMapProps['center'];
 
 export default function Home() {
-  const { signOut } = Auth.useContainer();
-  const { t } = useTranslation();
+  const [position, setPosition] = useState<Position>();
 
-  return (
-    <Box>
-      <Typography>This is home screen.</Typography>
-      <Button onClick={signOut} type="submit">
-        {t('auth.label.logout')}
-      </Button>
-    </Box>
-  );
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coords }) =>
+      setPosition({ lat: coords.latitude, lng: coords.longitude })
+    );
+  }, []);
+
+  return <Map center={position} />;
 }

@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/KazuyaHara/centro/compare/v0.4.0...v0.5.0) (2022-07-28)
+
+
+### Features
+
+* **web:** switch map style ([#21](https://github.com/KazuyaHara/centro/issues/21)) ([4824e95](https://github.com/KazuyaHara/centro/commit/4824e95c3d84addd09bd8efe2cde43f6d53331df))
+
 # [0.4.0](https://github.com/KazuyaHara/centro/compare/v0.3.1...v0.4.0) (2022-07-28)
 
 

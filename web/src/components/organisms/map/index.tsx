@@ -3,6 +3,8 @@ import React, { memo } from 'react';
 import { GoogleMap, GoogleMapProps } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
 
+import styles from './styles.json';
+
 const defaultContainerStyle = { height: '100vh', width: '100vw' };
 const defautlZoom = 10;
 
@@ -24,7 +26,12 @@ function Map({
     <GoogleMap
       center={center || defaultCenter}
       mapContainerStyle={mapContainerStyle}
-      options={{ fullscreenControl: false, keyboardShortcuts: false, mapTypeControl: false }}
+      options={{
+        fullscreenControl: false,
+        keyboardShortcuts: false,
+        mapTypeControl: false,
+        styles,
+      }}
       zoom={zoom}
     >
       {children}

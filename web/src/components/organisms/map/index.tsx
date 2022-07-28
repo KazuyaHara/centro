@@ -32,6 +32,10 @@ function Map({
         fullscreenControl: false,
         keyboardShortcuts: false,
         mapTypeControl: false,
+        restriction: {
+          latLngBounds: { east: 180, north: 85, south: -85, west: -180 },
+          strictBounds: true,
+        },
         styles: monochrome ? styles : null,
       }}
       zoom={zoom}

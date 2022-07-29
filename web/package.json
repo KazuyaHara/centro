@@ -17,11 +17,11 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@googlemaps/js-api-loader": "^1.14.3",
     "@hookform/resolvers": "^2.9.6",
     "@mui/icons-material": "^5.8.4",
     "@mui/lab": "^5.0.0-alpha.90",
     "@mui/material": "^5.9.0",
-    "@react-google-maps/api": "^2.12.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -58,6 +58,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.49.2",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "eslint": "^7.32.0 || ^8.2.0",

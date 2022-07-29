@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useJsApiLoader } from '@react-google-maps/api';
+import { Loader } from '@googlemaps/js-api-loader';
 import { BrowserRouter } from 'react-router-dom';
 
 import Loading from '../components/pages/loading';
@@ -11,12 +11,17 @@ import UnauthenticatedRoutes from './unauthenticated';
 
 export default function Routes() {
   const auth = Auth.useContainer();
+  const [mapLoaded, setMapLoaded] = useState(false);
 
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_APIKEY_JAVASCRIPT || '',
-  });
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: process.env.REACT_APP_GOOGLE_MAPS_APIKEY_JAVASCRIPT || '',
+      version: 'beta',
+    });
+    loader.load().then(() => setMapLoaded(true));
+  }, []);
 
-  if (auth.initializing || !isLoaded) return <Loading />;
+  if (auth.initializing || !mapLoaded) return <Loading />;
   return (
     <BrowserRouter>
       <ScrollToTop />

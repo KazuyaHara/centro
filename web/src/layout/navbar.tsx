@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Logo from '../assets/images/logo/black.png';
 import Auth from '../hooks/auth';
@@ -23,6 +23,7 @@ import Map from '../hooks/map';
 export default function DashboardNavbar() {
   const { signOut } = Auth.useContainer();
   const { monochrome, toggleMapStyle } = Map.useContainer();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const { t } = useTranslation();
 
@@ -31,7 +32,7 @@ export default function DashboardNavbar() {
 
   return (
     <AppBar sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
-      <Container>
+      <Container maxWidth={location.pathname === '/' ? 'xl' : 'lg'}>
         <Toolbar disableGutters sx={{ flex: 1, justifyContent: 'space-between' }}>
           <Link to="/">
             <Box component="img" src={Logo} sx={{ maxHeight: 24 }} />

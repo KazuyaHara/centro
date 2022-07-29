@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Box, Button, Container, Stack } from '@mui/material';
+import { use100vh } from 'react-div-100vh';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -42,10 +43,17 @@ const shuffle = ([...array]) => {
 };
 
 export default function Landing() {
+  const height = use100vh();
   const { t } = useTranslation();
 
   return (
-    <Box display="flex" flexDirection="column" justifyContent="center" minHeight="100vh" py={10}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      minHeight={height || '100vh'}
+      py={10}
+    >
       <Container>
         <Box
           alt="Centro"

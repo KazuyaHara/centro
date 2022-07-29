@@ -2,6 +2,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 
 import { Box, BoxProps } from '@mui/material';
+import { use100vh } from 'react-div-100vh';
 import { useTranslation } from 'react-i18next';
 
 import MapHook from '../../../hooks/map';
@@ -23,6 +24,7 @@ const defaultOptions: google.maps.MapOptions = {
 
 function Map({ center, sx, ...mapOptions }: Props) {
   const { monochrome } = MapHook.useContainer();
+  const height = use100vh();
   const ref = useRef<HTMLDivElement>(null);
   const [, setMap] = useState<google.maps.Map>();
   const { i18n } = useTranslation();
@@ -44,7 +46,7 @@ function Map({ center, sx, ...mapOptions }: Props) {
     }
   }, [center, monochrome, ref]);
 
-  return <Box ref={ref} sx={{ height: '100vh', width: '100vw', ...sx }} />;
+  return <Box ref={ref} sx={{ height: height || '100vh', width: '100vw', ...sx }} />;
 }
 
 export default memo(Map);

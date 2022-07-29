@@ -1,3 +1,10 @@
+## [0.5.2](https://github.com/KazuyaHara/centro/compare/v0.5.1...v0.5.2) (2022-07-29)
+
+
+### Bug Fixes
+
+* **web:** extend navbar width ([#25](https://github.com/KazuyaHara/centro/issues/25)) ([542f1a3](https://github.com/KazuyaHara/centro/commit/542f1a3b0368f7a2308ccf53e1318db5810a8b13))
+
 ## [0.5.1](https://github.com/KazuyaHara/centro/compare/v0.5.0...v0.5.1) (2022-07-28)
 
 

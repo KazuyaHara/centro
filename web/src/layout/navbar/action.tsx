@@ -60,25 +60,27 @@ export default function Action({ anchorEl, onClose, onToggle }: Props) {
           </Typography>
         </MenuItem>
 
-        {pathname === '/' && (
-          <>
-            <Divider />
-            <Typography fontSize={12} px={2} variant="subtitle2">
-              {t('menu.subtitle.displaySetting')}
-            </Typography>
-            <MenuItem onClick={toggleMapStyle}>
-              <Typography fontWeight="bold" variant="body2">
-                {t('menu.label.placesWhereYouWere')}
-              </Typography>
-              <Switch
-                checked={monochrome}
-                inputProps={{ 'aria-label': t('menu.label.placesWhereYouWere') }}
-                size="small"
-                sx={{ ml: 2 }}
-              />
-            </MenuItem>
-          </>
-        )}
+        <Divider sx={{ display: pathname === '/' ? 'block' : 'none' }} />
+
+        <Typography
+          display={pathname === '/' ? 'block' : 'none'}
+          fontSize={12}
+          px={2}
+          variant="subtitle2"
+        >
+          {t('menu.subtitle.displaySetting')}
+        </Typography>
+        <MenuItem onClick={toggleMapStyle} sx={{ display: pathname === '/' ? 'flex' : 'none' }}>
+          <Typography fontWeight="bold" variant="body2">
+            {t('menu.label.placesWhereYouWere')}
+          </Typography>
+          <Switch
+            checked={monochrome}
+            inputProps={{ 'aria-label': t('menu.label.placesWhereYouWere') }}
+            size="small"
+            sx={{ ml: 2 }}
+          />
+        </MenuItem>
 
         <Divider />
 

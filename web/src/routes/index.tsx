@@ -16,6 +16,7 @@ export default function Routes() {
   useEffect(() => {
     const loader = new Loader({
       apiKey: process.env.REACT_APP_GOOGLE_MAPS_APIKEY_JAVASCRIPT || '',
+      libraries: ['places'],
       version: 'beta',
     });
     loader.load().then(() => setMapLoaded(true));

@@ -1,5 +1,6 @@
 {
   "moment": {
-    "heading": { "addImageMoment": "Add a moment with images" }
+    "heading": { "addImageMoment": "Add a moment with images" },
+    "form": { "label": { "place": "Place" } }
   }
 }

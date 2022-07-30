@@ -1,5 +1,6 @@
 {
   "moment": {
-    "heading": { "addImageMoment": "写真モーメントを追加" }
+    "heading": { "addImageMoment": "写真モーメントを追加" },
+    "form": { "label": { "place": "場所" } }
   }
 }

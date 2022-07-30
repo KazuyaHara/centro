@@ -1,48 +1,53 @@
-import React, { memo } from 'react';
+/* global google */
+import React, { memo, useEffect, useRef, useState } from 'react';
 
-import { GoogleMap, GoogleMapProps } from '@react-google-maps/api';
+import { Box, BoxProps } from '@mui/material';
+import { use100vh } from 'react-div-100vh';
 import { useTranslation } from 'react-i18next';
 
 import MapHook from '../../../hooks/map';
-import styles from './styles.json';
 
-const defaultContainerStyle = { height: '100vh', width: '100vw' };
-const defautlZoom = 10;
+export type Center = google.maps.MapOptions['center'];
+type Props = Pick<BoxProps, 'sx'> & google.maps.MapOptions;
 
-type Props = Pick<GoogleMapProps, 'center' | 'children' | 'mapContainerStyle' | 'zoom'>;
+const defaultOptions: google.maps.MapOptions = {
+  fullscreenControl: false,
+  keyboardShortcuts: false,
+  mapTypeControl: false,
+  restriction: {
+    latLngBounds: { east: 180, north: 85, south: -85, west: -180 },
+    strictBounds: true,
+  },
+  zoom: 10,
+};
+const centroMapId = process.env.REACT_APP_GOOGLE_MAPS_ID_CENTRO || '';
+const googleMapId = process.env.REACT_APP_GOOGLE_MAPS_ID_GOOGLE || '';
 
-function Map({
-  center,
-  children,
-  mapContainerStyle = defaultContainerStyle,
-  zoom = defautlZoom,
-}: Props) {
+function Map({ center, sx, ...mapOptions }: Props) {
   const { monochrome } = MapHook.useContainer();
+  const height = use100vh();
+  const ref = useRef<HTMLDivElement>(null);
+  const [, setMap] = useState<google.maps.Map>();
   const { i18n } = useTranslation();
 
   const defaultCenter = i18n.language.startsWith('ja')
     ? { lat: 35.6809591, lng: 139.7673068 }
     : { lat: 41.892464, lng: 12.485325 };
 
-  return (
-    <GoogleMap
-      center={center || defaultCenter}
-      mapContainerStyle={mapContainerStyle}
-      options={{
-        fullscreenControl: false,
-        keyboardShortcuts: false,
-        mapTypeControl: false,
-        restriction: {
-          latLngBounds: { east: 180, north: 85, south: -85, west: -180 },
-          strictBounds: true,
-        },
-        styles: monochrome ? styles : null,
-      }}
-      zoom={zoom}
-    >
-      {children}
-    </GoogleMap>
-  );
+  useEffect(() => {
+    if (ref.current) {
+      setMap(
+        new google.maps.Map(ref.current, {
+          ...defaultOptions,
+          center: center || defaultCenter,
+          mapId: monochrome ? centroMapId : googleMapId,
+          ...mapOptions,
+        })
+      );
+    }
+  }, [center, monochrome, ref]);
+
+  return <Box ref={ref} sx={{ height: height || '100vh', width: '100vw', ...sx }} />;
 }
 
 export default memo(Map);

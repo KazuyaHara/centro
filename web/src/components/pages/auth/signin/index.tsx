@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Box, Container, Stack, Typography } from '@mui/material';
+import { use100vh } from 'react-div-100vh';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
@@ -13,6 +14,7 @@ import Form, { Submit } from '../../../organisms/form/signin';
 export default function SignIn() {
   const alert = Alert.useContainer();
   const { signInWithEmail } = Auth.useContainer();
+  const height = use100vh();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
@@ -35,7 +37,7 @@ export default function SignIn() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          minHeight: '100vh',
+          minHeight: height || '100vh',
         }}
       >
         <Box alt="Centro" component="img" mx="auto" src={Logo} sx={{ maxWidth: 180 }} />

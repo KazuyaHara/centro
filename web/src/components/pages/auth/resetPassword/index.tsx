@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Box, Container } from '@mui/material';
+import { use100vh } from 'react-div-100vh';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +14,7 @@ import Form, { Submit } from '../../../organisms/form/resetPassword';
 export default function ResetPassword() {
   const alert = Alert.useContainer();
   const { sendPasswordResetEmail } = Auth.useContainer();
+  const height = use100vh();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
@@ -39,7 +41,7 @@ export default function ResetPassword() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          minHeight: '100vh',
+          minHeight: height || '100vh',
         }}
       >
         <Box alt="Centro" component="img" mx="auto" src={Logo} sx={{ maxWidth: 180 }} />

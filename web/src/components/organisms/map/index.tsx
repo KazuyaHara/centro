@@ -6,7 +6,6 @@ import { use100vh } from 'react-div-100vh';
 import { useTranslation } from 'react-i18next';
 
 import MapHook from '../../../hooks/map';
-import styles from './styles.json';
 
 export type Center = google.maps.MapOptions['center'];
 type Props = Pick<BoxProps, 'sx'> & google.maps.MapOptions;
@@ -21,6 +20,8 @@ const defaultOptions: google.maps.MapOptions = {
   },
   zoom: 10,
 };
+const centroMapId = process.env.REACT_APP_GOOGLE_MAPS_ID_CENTRO || '';
+const googleMapId = process.env.REACT_APP_GOOGLE_MAPS_ID_GOOGLE || '';
 
 function Map({ center, sx, ...mapOptions }: Props) {
   const { monochrome } = MapHook.useContainer();
@@ -39,7 +40,7 @@ function Map({ center, sx, ...mapOptions }: Props) {
         new google.maps.Map(ref.current, {
           ...defaultOptions,
           center: center || defaultCenter,
-          styles: monochrome ? styles : null,
+          mapId: monochrome ? centroMapId : googleMapId,
           ...mapOptions,
         })
       );

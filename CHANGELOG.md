@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/KazuyaHara/centro/compare/v0.5.2...v0.6.0) (2022-07-30)
+
+
+### Features
+
+* **web:** use [@googlemaps-js-api-loader](https://github.com/googlemaps-js-api-loader) ([#26](https://github.com/KazuyaHara/centro/issues/26)) ([2f5fabe](https://github.com/KazuyaHara/centro/commit/2f5fabe9a511f32a5f7226f5acad52a74a19ce72))
+
 ## [0.5.2](https://github.com/KazuyaHara/centro/compare/v0.5.1...v0.5.2) (2022-07-29)
 
 

@@ -1,0 +1,6 @@
+{
+  "menu": {
+    "label": { "addPhotos": "写真を追加", "placesWhereYouWere": "白地図表示" },
+    "subtitle": { "addMoment": "モーメントを追加", "displaySetting": "表示設定" }
+  }
+}

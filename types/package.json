@@ -1,0 +1,11 @@
+{
+  "name": "types",
+  "version": "0.6.0",
+  "dependencies": {
+    "firebase": "^9.9.1"
+  },
+  "private": true,
+  "scripts": {
+    "eslint": "echo \"Skip types eslint.\""
+  }
+}

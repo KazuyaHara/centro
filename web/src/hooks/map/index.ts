@@ -3,24 +3,14 @@
 import { RefObject, useEffect, useState } from 'react';
 
 import { Loader } from '@googlemaps/js-api-loader';
-import stringify from 'json-stable-stringify';
 import { useTranslation } from 'react-i18next';
 import { createContainer } from 'unstated-next';
 
+export type GeocoderResult = google.maps.GeocoderResult;
 type InitMap = google.maps.MapOptions & { ref: RefObject<HTMLDivElement> };
 type InitAutocomplete = { ref: RefObject<HTMLInputElement> };
-type PlaceResult = Pick<
-  google.maps.places.PlaceResult,
-  'address_components' | 'formatted_address' | 'geometry'
->;
-export type PlaceResultWithId = Pick<
-  google.maps.places.PlaceResult,
-  'formatted_address' | 'geometry'
-> & {
-  address_components: Array<google.maps.GeocoderAddressComponent & { place_id: string }>;
-};
+type PlaceResult = Pick<google.maps.places.PlaceResult, 'geometry'>;
 
-const boundaries = ['country', 'administrative_area_level_1', 'locality'];
 const defaultOptions: google.maps.MapOptions = {
   fullscreenControl: false,
   keyboardShortcuts: false,
@@ -55,44 +45,15 @@ function useMap() {
     loadAPI().then(() => setIsLoaded(true));
   }, []);
 
-  const getPlaceWithId = async () => {
-    // get place
+  const getPlace = () => {
     if (!autocomplete) return undefined;
-    let place = autocomplete.getPlace() as PlaceResult;
-    place = {
-      ...place,
-      address_components: place.address_components?.filter((component) =>
-        component.types.some((type) => boundaries.includes(type))
-      ),
-    };
-    if (!place.address_components) return undefined;
-
-    // get place ids by reverse geocoding
-    const geocoder = new google.maps.Geocoder();
-    const geocoded = await geocoder
-      .geocode({ location: place.geometry?.location })
-      .then((response) => response.results);
-
-    // add place ids to place
-    const placeWithId: PlaceResultWithId = {
-      ...place,
-      address_components: place.address_components
-        .map((component) => {
-          const componentTypes = stringify(component.types);
-          const found = geocoded.find(({ types }) => stringify(types) === componentTypes);
-          if (!found) return undefined;
-          return { ...component, place_id: found.place_id };
-        })
-        .filter((component): component is NonNullable<typeof component> => component != null),
-    };
-
-    return placeWithId.address_components.length === 0 ? undefined : placeWithId;
+    return autocomplete.getPlace() as PlaceResult;
   };
 
   const initAutocomplete = ({ ref }: InitAutocomplete) => {
     if (ref.current) {
       const initialized = new google.maps.places.Autocomplete(ref.current);
-      initialized.setFields(['address_component', 'formatted_address', 'geometry']);
+      initialized.setFields(['geometry']);
       setAutocomplete(initialized);
     }
   };
@@ -111,16 +72,24 @@ function useMap() {
 
   const loadAPI = async () => loader.load();
 
+  const reverseGeocode = async (place: PlaceResult) => {
+    const geocoder = new google.maps.Geocoder();
+    return geocoder
+      .geocode({ location: place.geometry?.location })
+      .then((response) => response.results);
+  };
+
   const toggleMapStyle = () => setMonochrome(!monochrome);
 
   return {
     autocomplete,
-    getPlaceWithId,
+    getPlace,
     initAutocomplete,
     initMap,
     isLoaded,
     map,
     monochrome,
+    reverseGeocode,
     toggleMapStyle,
   };
 }

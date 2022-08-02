@@ -92,7 +92,11 @@
   },
   "workspaces": {
     "packages": [
+      "types",
       "web"
+    ],
+    "nohoist": [
+      "web/**"
     ]
   }
 }

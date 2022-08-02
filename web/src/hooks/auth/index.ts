@@ -91,6 +91,7 @@ function useAuth() {
   };
 
   return {
+    data,
     initializing,
     isAnonymous: data.isAnonymous,
     linkWithEmail,

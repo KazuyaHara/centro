@@ -49,6 +49,7 @@
             {
               "files": [
                 "package.json",
+                "types/package.json",
                 "web/package.json"
               ],
               "from": "\"version\": \".*\"",
@@ -63,6 +64,7 @@
           "assets": [
             "CHANGELOG.md",
             "package.json",
+            "types/package.json",
             "web/package.json"
           ],
           "message": "chore(release): ${nextRelease.gitTag} [skip ci]"

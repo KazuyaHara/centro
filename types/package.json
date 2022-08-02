@@ -1,0 +1,17 @@
+{
+  "name": "types",
+  "version": "0.6.0",
+  "dependencies": {
+    "firebase": "^9.9.1"
+  },
+  "private": true,
+  "scripts": {
+    "build:dev": "echo \"Skip types build:dev.\"",
+    "build:prd": "echo \"Skip types build:prd.\"",
+    "build:stg": "echo \"Skip types build:stg.\"",
+    "deploy:dev": "echo \"Skip types deploy:dev.\"",
+    "deploy:prd": "echo \"Skip types deploy:prd.\"",
+    "deploy:stg": "echo \"Skip types deploy:stg.\"",
+    "eslint": "echo \"Skip types eslint.\""
+  }
+}

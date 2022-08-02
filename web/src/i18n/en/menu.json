@@ -1,0 +1,6 @@
+{
+  "menu": {
+    "label": { "addPhotos": "Add photos", "placesWhereYouWere": "Only places where you were" },
+    "subtitle": { "addMoment": "Add a moment", "displaySetting": "Display Setting" }
+  }
+}

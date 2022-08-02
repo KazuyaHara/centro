@@ -3,49 +3,79 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 
 import { Box, BoxProps } from '@mui/material';
 import { use100vh } from 'react-div-100vh';
-import { useTranslation } from 'react-i18next';
 
-import MapHook from '../../../hooks/map';
+import { Footprint } from '../../../../../types';
+import MapHook, { defaultOptions } from '../../../hooks/map';
 
 export type Center = google.maps.MapOptions['center'];
-type Props = Pick<BoxProps, 'sx'> & google.maps.MapOptions;
+type Props = Pick<BoxProps, 'sx'> & google.maps.MapOptions & { footprints: Footprint[] };
 
-const defaultOptions: google.maps.MapOptions = {
-  fullscreenControl: false,
-  keyboardShortcuts: false,
-  mapTypeControl: false,
-  restriction: {
-    latLngBounds: { east: 180, north: 85, south: -85, west: -180 },
-    strictBounds: true,
-  },
-  zoom: 10,
-};
-const centroMapId = process.env.REACT_APP_GOOGLE_MAPS_ID_CENTRO || '';
-const googleMapId = process.env.REACT_APP_GOOGLE_MAPS_ID_GOOGLE || '';
+const defaultZoom = defaultOptions.zoom || 10;
+const featureColor = '#00838F';
 
-function Map({ center, sx, ...mapOptions }: Props) {
-  const { monochrome } = MapHook.useContainer();
+function Map({ center, footprints, sx, ...mapOptions }: Props) {
+  const { initMap, map, monochrome } = MapHook.useContainer();
   const height = use100vh();
   const ref = useRef<HTMLDivElement>(null);
-  const [, setMap] = useState<google.maps.Map>();
-  const { i18n } = useTranslation();
-
-  const defaultCenter = i18n.language.startsWith('ja')
-    ? { lat: 35.6809591, lng: 139.7673068 }
-    : { lat: 41.892464, lng: 12.485325 };
+  const [zoom, setZoom] = useState(defaultZoom);
 
   useEffect(() => {
-    if (ref.current) {
-      setMap(
-        new google.maps.Map(ref.current, {
-          ...defaultOptions,
-          center: center || defaultCenter,
-          mapId: monochrome ? centroMapId : googleMapId,
-          ...mapOptions,
-        })
+    initMap({ center, ref, ...mapOptions });
+  }, [center, monochrome, ref]);
+
+  useEffect(() => {
+    if (map) {
+      map.addListener('zoom_changed', async () =>
+        setZoom(Math.round(map.getZoom() || defaultZoom))
       );
     }
-  }, [center, monochrome, ref]);
+  }, [map]);
+
+  useEffect(() => {
+    if (map) {
+      // @ts-ignore
+      const countryLayer = map.getFeatureLayer('COUNTRY');
+      // @ts-ignore
+      const admin1Layer = map.getFeatureLayer('ADMINISTRATIVE_AREA_LEVEL_1');
+      // @ts-ignore
+      const localityLayer = map.getFeatureLayer('LOCALITY');
+
+      // @ts-ignore
+      const featureStyleOptions: google.maps.FeatureStyleOptions = {
+        fillColor: featureColor,
+        fillOpacity: 0.5,
+        strokeColor: featureColor,
+        strokeOpacity: 1.0,
+        strokeWeight: 2.0,
+      };
+
+      if (zoom < 7) {
+        countryLayer.style = (options: { feature: { placeId: string } }) => {
+          const placeIds = footprints.map(({ placeId }) => placeId);
+          if (placeIds.includes(options.feature.placeId)) return featureStyleOptions;
+          return undefined;
+        };
+        admin1Layer.style = null;
+        localityLayer.style = null;
+      } else if (zoom < 10) {
+        admin1Layer.style = (options: { feature: { placeId: string } }) => {
+          const placeIds = footprints.map(({ placeId }) => placeId);
+          if (placeIds.includes(options.feature.placeId)) return featureStyleOptions;
+          return undefined;
+        };
+        countryLayer.style = null;
+        localityLayer.style = null;
+      } else {
+        localityLayer.style = (options: { feature: { placeId: string } }) => {
+          const placeIds = footprints.map(({ placeId }) => placeId);
+          if (placeIds.includes(options.feature.placeId)) return featureStyleOptions;
+          return undefined;
+        };
+        countryLayer.style = null;
+        admin1Layer.style = null;
+      }
+    }
+  }, [footprints, map, zoom]);
 
   return <Box ref={ref} sx={{ height: height || '100vh', width: '100vw', ...sx }} />;
 }

@@ -49,7 +49,7 @@ function Map({ center, footprints, sx, ...mapOptions }: Props) {
         strokeWeight: 2.0,
       };
 
-      if (zoom < 7) {
+      if (zoom < 5) {
         countryLayer.style = (options: { feature: { placeId: string } }) => {
           const placeIds = footprints.map(({ placeId }) => placeId);
           if (placeIds.includes(options.feature.placeId)) return featureStyleOptions;

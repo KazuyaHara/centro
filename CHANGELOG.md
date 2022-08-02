@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/KazuyaHara/centro/compare/v0.6.0...v0.7.0) (2022-08-02)
+
+
+### Features
+
+* **web:** create footprints ([#28](https://github.com/KazuyaHara/centro/issues/28)) ([caea364](https://github.com/KazuyaHara/centro/commit/caea36492e7fe5c596ef07de3a367771d9e83483))
+
 # [0.6.0](https://github.com/KazuyaHara/centro/compare/v0.5.2...v0.6.0) (2022-07-30)
 
 

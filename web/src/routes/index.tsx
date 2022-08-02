@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { Loader } from '@googlemaps/js-api-loader';
 import { BrowserRouter } from 'react-router-dom';
 
 import Loading from '../components/pages/loading';
 import Auth from '../hooks/auth';
+import Map from '../hooks/map';
 import AuthenticatedRoutes from './authenticated';
 import ScrollToTop from './scrollToTop';
 import UnauthenticatedRoutes from './unauthenticated';
 
 export default function Routes() {
   const auth = Auth.useContainer();
-  const [mapLoaded, setMapLoaded] = useState(false);
+  const map = Map.useContainer();
 
-  useEffect(() => {
-    const loader = new Loader({
-      apiKey: process.env.REACT_APP_GOOGLE_MAPS_APIKEY_JAVASCRIPT || '',
-      libraries: ['places'],
-      version: 'beta',
-    });
-    loader.load().then(() => setMapLoaded(true));
-  }, []);
-
-  if (auth.initializing || !mapLoaded) return <Loading />;
+  if (auth.initializing || !map.isLoaded) return <Loading />;
   return (
     <BrowserRouter>
       <ScrollToTop />

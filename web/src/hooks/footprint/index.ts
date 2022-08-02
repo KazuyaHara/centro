@@ -1,4 +1,14 @@
-import { doc, FieldValue, FirestoreError, increment, writeBatch } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  DocumentSnapshot,
+  FieldValue,
+  FirestoreError,
+  increment,
+  onSnapshot,
+  Unsubscribe,
+  writeBatch,
+} from 'firebase/firestore';
 import { useTranslation } from 'react-i18next';
 
 import { Footprint } from '../../../../types';
@@ -39,5 +49,21 @@ export default function useFootprint() {
     return batch.commit().catch(handleError);
   };
 
-  return { create };
+  const formatDoc = (docSnapshot: DocumentSnapshot): Footprint =>
+    docSnapshot.data({
+      serverTimestamps: 'estimate',
+    }) as Footprint;
+
+  const subscribe = (onUpdate: (footprints: Footprint[]) => void): Unsubscribe => {
+    const userRef = doc(db, `users/${auth.data.uid}`);
+    const footprintsRef = collection(db, userRef.path, 'footprints');
+
+    return onSnapshot(
+      footprintsRef,
+      (querySnapshot) => onUpdate(querySnapshot.docs.map(formatDoc)),
+      () => onUpdate([])
+    );
+  };
+
+  return { create, subscribe };
 }

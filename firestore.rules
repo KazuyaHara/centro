@@ -12,7 +12,7 @@ service cloud.firestore {
       }
 
       match /footprints/{footprintId} {
-        allow write: if self();
+        allow write, list: if self();
       }
     }
   }

@@ -11,7 +11,7 @@ type InitMap = google.maps.MapOptions & { ref: RefObject<HTMLDivElement> };
 type InitAutocomplete = { ref: RefObject<HTMLInputElement> };
 type PlaceResult = Pick<google.maps.places.PlaceResult, 'geometry'>;
 
-const defaultOptions: google.maps.MapOptions = {
+export const defaultOptions: google.maps.MapOptions = {
   fullscreenControl: false,
   keyboardShortcuts: false,
   mapTypeControl: false,
@@ -19,7 +19,7 @@ const defaultOptions: google.maps.MapOptions = {
     latLngBounds: { east: 180, north: 85, south: -85, west: -180 },
     strictBounds: true,
   },
-  zoom: 10,
+  zoom: 9,
 };
 const centroMapId = process.env.REACT_APP_GOOGLE_MAPS_ID_CENTRO || '';
 const googleMapId = process.env.REACT_APP_GOOGLE_MAPS_ID_GOOGLE || '';

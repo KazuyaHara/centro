@@ -6,7 +6,9 @@ import {
   FirestoreError,
   increment,
   onSnapshot,
+  query,
   Unsubscribe,
+  where,
   writeBatch,
 } from 'firebase/firestore';
 import { useTranslation } from 'react-i18next';
@@ -59,7 +61,7 @@ export default function useFootprint() {
     const footprintsRef = collection(db, userRef.path, 'footprints');
 
     return onSnapshot(
-      footprintsRef,
+      query(footprintsRef, where('count', '>', 0)),
       (querySnapshot) => onUpdate(querySnapshot.docs.map(formatDoc)),
       () => onUpdate([])
     );
